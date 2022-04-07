@@ -23,24 +23,17 @@ public class Main {
             arr[i][1] = Integer.parseInt(st.nextToken());
         };
         
-        Arrays.sort(arr,(o1,o2)->(o1[0] == o2[0] ? o1[1] - o2[1] : o1[0] - o2[0]));
+        Arrays.sort(arr,(o1,o2)->(o1[1] == o2[1] ? o1[0] - o2[0] : o1[1] - o2[1]));
 
         int result = 0;
-        int startTime = -1;
         int endTime = 0;
         for (int i = 0; i < arr.length; i++) {
-            int c = 0;
-            for (int j = i; j < arr.length; j++) {
-                if(arr[j][0] != startTime && arr[j][0] > endTime) {
-                    startTime = arr[j][0];
-                    endTime = arr[j][1];
-                    c++;
-                }
+            if(endTime <= arr[i][0]) {
+                endTime = arr[i][1];
+                result++;
             }
-            if(c > result) result = c;
         }
         
-
         bw.write(String.valueOf(result));
         bw.flush();   
         bw.close();
